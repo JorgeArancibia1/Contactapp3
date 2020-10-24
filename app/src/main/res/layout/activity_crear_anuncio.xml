@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".crear_anuncio">
+
+    <FrameLayout
+        android:id="@+id/frameLayout4"
+        android:layout_width="385dp"
+        android:layout_height="158dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/medicamentos" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="101dp"
+            android:layout_height="111dp"
+            android:layout_gravity="center_vertical|end"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/chevron" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="123dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/medicamentos" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="387dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+        <ImageView
+            android:id="@+id/chv"
+            android:layout_width="85dp"
+            android:layout_height="111dp"
+            android:layout_gravity="end"
+            android:background="@drawable/chevron"
+            android:contentDescription="@string/avatar"
+            android:onClick="irAPublicar"
+            app:srcCompat="@drawable/chevron" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/alimentos" />
+
+        <TextView
+            android:id="@+id/txt_alimentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/alimentos" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="391dp"
+        android:layout_height="106dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_gravity="end"
+            android:background="@drawable/avataar"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/avataar" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:onClick="cerrarSesion"
+            android:text="@string/cerrarsesion" />
+
+        <TextView
+            android:id="@+id/txt_alimentos1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/crearAnuncio"
+            android:textSize="30sp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout3"
+        android:layout_width="385dp"
+        android:layout_height="158dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
+
+        <TextView
+            android:id="@+id/txt_cosmeticos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/cosmeticos" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="92dp"
+            android:layout_height="109dp"
+            android:layout_gravity="center_vertical|end"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/chevron" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="124dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/cosmeticos" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="385dp"
+        android:layout_height="158dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout4">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/vestuario" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="106dp"
+            android:layout_height="116dp"
+            android:layout_gravity="center_vertical|end"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/chevron" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="125dp"
+            android:layout_height="144dp"
+            android:contentDescription="@string/avatar"
+            app:srcCompat="@drawable/vestuario" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="386dp"
+        android:layout_height="60dp"
+        android:text="@string/categoria_emp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>

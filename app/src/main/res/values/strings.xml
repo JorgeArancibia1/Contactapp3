@@ -1,0 +1,88 @@
+<resources>
+    <!-- Main -->
+    <string name="app_name">ContactApp</string>
+    <string name="Bienvenidos">Bienvenido</string>
+    <string name="nombre">Nombre</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="olvidaste">¿Olvidaste tu contraseña?</string>
+    <string name="contentdescription">logo</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="title_activity_activity2">activity2</string>
+
+    <!-- Recuperar contraseña -->
+
+    <string name="recuperar">Recuperar contraseña</string>
+    <string name="correo">Ingrese correo</string>
+    <string name="enviar">Enviar</string>
+
+    <!-- Crear cuenta -->
+
+    <string name="crear">Crear cuenta</string>
+    <string name="persona">Persona</string>
+    <string name="empresa">Empresa</string>
+
+    <!-- Crear anuncio -->
+
+    <string name="crearAnuncio">Crear anuncio</string>
+    <string name="contraseñac">Contraseña:</string>
+    <string name="confcontraseñac">Confirmar contraseña:</string>
+
+    <!-- Categorias -->
+
+    <string name="categorias">Categorías</string>
+    <string name="cerrarsesion">Cerrar sesión</string>
+    <string name="avatar">Avatar</string>
+    <string name="alimentos">Alimentos</string>
+
+    <!-- Categorias emp -->
+
+    <string name="publicacion">Publica tu empresa</string>
+    <string name="categoria_emp">Selecciona la categoría de tu anuncio:</string>
+
+    <!-- Alimentos -->
+
+    <string name="descripcion">Descripcion</string>
+
+    <!-- Cosméticos -->
+
+    <string name="cosmeticos">Cosméticos</string>
+
+    <!-- Medicamentos -->
+
+    <string name="medicamentos">Medicamentos</string>
+
+    <!-- Vestuario -->
+
+    <string name="vestuario">Vestuario</string>
+
+    <!-- Publicar -->
+
+    <string name="publicar">Publicar</string>
+    <string name="cargarImagen">Cargar imagen</string>
+    <string name="crearPublicacion">Crear publicación</string>
+
+    <string name="nombrePyme">Nombre o empresa:</string>
+    <string name="descripcionp">Descripción:</string>
+    <string name="correop">Correo:</string>
+    <string name="paginawebp">Página web:</string>
+    <string name="facebookp">Facebook:</string>
+    <string name="instagramp">Instagram:</string>
+    <string name="whatsapp">Whatsapp:</string>
+
+    <!-- Detalle -->
+
+    <string name="tituloFruitsal">Fruitsal</string>
+    <string name="dfruitsal">En Fruitsal nos encargamos de distribuir frutas a lo largo de todo santiago.</string>
+    <string name="contactanos">Contactanos mediante:</string>
+    <string name="web">www.fruitsal.cl</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_categorias">categorias</string>
+</resources>
