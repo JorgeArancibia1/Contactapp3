@@ -24,7 +24,7 @@ public class categorias extends AppCompatActivity {
 
     public void irADetalleAlimentos(View view){
 
-        Intent i = new Intent(this, alimentos.class);
+        Intent i = new Intent(this, mostrar_publicaciones_user.class);
 
         startActivity(i);
     }

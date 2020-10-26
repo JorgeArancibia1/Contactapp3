@@ -26,6 +26,7 @@
             android:id="@+id/imageView5"
             android:layout_width="46dp"
             android:layout_height="60dp"
+            android:contentDescription="@string/avatar"
             android:onClick="volverAlInicio"
             android:rotationY="180"
             app:srcCompat="@drawable/chevron" />
@@ -36,38 +37,48 @@
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/avatar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:srcCompat="@drawable/msje"
-        tools:layout_editor_absoluteX="113dp" />
+        app:srcCompat="@drawable/msje" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="40dp"
         android:text="@string/recuperar"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7"
-        tools:layout_editor_absoluteX="79dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
     <EditText
         android:id="@+id/editTextTextPersonName5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/correo"
         android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        tools:layout_editor_absoluteX="79dp" />
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="48dp"
         android:text="@string/enviar"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5"
-        tools:layout_editor_absoluteX="138dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

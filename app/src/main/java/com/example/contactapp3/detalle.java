@@ -16,7 +16,7 @@ public class detalle extends AppCompatActivity {
 
     public void volverAAlimentos(View view){
 
-        Intent i = new Intent(this, alimentos.class);
+        Intent i = new Intent(this, mostrar_publicaciones.class);
 
         startActivity(i);
     }

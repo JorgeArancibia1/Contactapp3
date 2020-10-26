@@ -28,7 +28,7 @@
             android:layout_height="54dp"
             android:onClick="volverAAlimentos"
             android:rotationY="180"
-            app:srcCompat="@mipmap/chevron" />
+            app:srcCompat="@drawable/chevron" />
 
     </FrameLayout>
 

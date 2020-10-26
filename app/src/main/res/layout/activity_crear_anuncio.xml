@@ -29,6 +29,7 @@
             android:layout_height="111dp"
             android:layout_gravity="center_vertical|end"
             android:contentDescription="@string/avatar"
+            android:onClick="irAPublicar"
             app:srcCompat="@drawable/chevron" />
 
         <ImageView
@@ -67,7 +68,7 @@
             app:srcCompat="@drawable/alimentos" />
 
         <TextView
-            android:id="@+id/txt_alimentos"
+            android:id="@+id/txt_alimentosca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -132,6 +133,7 @@
             android:layout_height="109dp"
             android:layout_gravity="center_vertical|end"
             android:contentDescription="@string/avatar"
+            android:onClick="irAPublicar"
             app:srcCompat="@drawable/chevron" />
 
         <ImageView
@@ -146,6 +148,9 @@
     <FrameLayout
         android:layout_width="385dp"
         android:layout_height="158dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout4">
 
@@ -162,6 +167,7 @@
             android:layout_height="116dp"
             android:layout_gravity="center_vertical|end"
             android:contentDescription="@string/avatar"
+            android:onClick="irAPublicar"
             app:srcCompat="@drawable/chevron" />
 
         <ImageView

@@ -4,45 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".categorias_emp">
+    tools:context=".mostrar_publicaciones">
 
     <FrameLayout
         android:layout_width="394dp"
         android:layout_height="155dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
-        <TextView
-            android:id="@+id/txt_cosmeticos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/alimentos" />
-
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="107dp"
-            android:layout_height="83dp"
+            android:layout_width="89dp"
+            android:layout_height="74dp"
+            android:layout_gravity="center_vertical"
             android:background="@drawable/food"
             android:contentDescription="@string/avatar"
-            app:srcCompat="@drawable/food" />
+            app:srcCompat="@drawable/logo" />
 
         <ImageView
             android:id="@+id/chv"
-            android:layout_width="72dp"
-            android:layout_height="100dp"
-            android:layout_gravity="end"
+            android:layout_width="45dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center_vertical|end"
             android:background="@drawable/chevron"
             android:contentDescription="@string/avatar"
-            android:onClick="irAMostrarPublicaciones"
             app:srcCompat="@drawable/chevron" />
 
+        <TextView
+            android:id="@+id/txt_descripcionU"
+            android:layout_width="212dp"
+            android:layout_height="138dp"
+            android:layout_gravity="center"
+            android:hint="@string/descripcionp"
+            android:translationX="20sp" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:onClick="irABorrar"
+            android:text="@string/Borrar"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:onClick="irAEditar"
+            android:text="@string/Editar"
+            android:textSize="24sp" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="392dp"
         android:layout_height="138dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -60,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
-            android:onClick="volverAlInicio"
+            android:onClick="cerrarSesion"
             android:text="@string/cerrarsesion"
             android:translationX="-15sp" />
 
@@ -69,15 +89,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/categorias"
+            android:text="@string/alimentos"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="111dp"
-            android:layout_height="113dp"
-            android:onClick="irACrearAnuncio"
-            android:text="@string/publicacion" />
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="40dp"
+            android:layout_height="54dp"
+            android:contentDescription="@string/avatar"
+            android:onClick="volverACategorias"
+            android:rotationY="180"
+            app:srcCompat="@drawable/chevron" />
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

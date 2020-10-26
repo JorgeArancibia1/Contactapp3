@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-            Cursor fila = DatosDeUsuario.rawQuery("select * from usuarios where nommbb, nulaarrrreeggaaloo peero que es lo que está mal? yo veo bien la query D:
+            Cursor fila = DatosDeUsuario.rawQuery("select * from usuarios where nombre=?", new String[]{nombre});
 
             if (fila.moveToFirst()) {
 

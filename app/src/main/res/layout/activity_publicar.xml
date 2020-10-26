@@ -8,8 +8,8 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="392dp"
-        android:layout_height="138dp"
+        android:layout_width="399dp"
+        android:layout_height="97dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -47,7 +47,7 @@
             android:contentDescription="@string/avatar"
             android:onClick="irAPublicarCategorias"
             android:rotationY="180"
-            app:srcCompat="@mipmap/chevron" />
+            app:srcCompat="@drawable/chevron" />
 
     </FrameLayout>
 
@@ -57,7 +57,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:hint="@string/nombrePyme"
         android:text="@string/nombrePyme"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,27 +133,29 @@
         android:id="@+id/et_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/nombrePyme"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <EditText
         android:id="@+id/et_descripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
+        android:hint="@string/descripcionp"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/et_nombre" />
 
     <EditText
         android:id="@+id/et_correo"
@@ -161,12 +163,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
+        android:hint="@string/correop"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/et_descripcion"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/et_descripcion" />
 
     <EditText
         android:id="@+id/et_pagina"
@@ -176,10 +179,11 @@
         android:layout_marginLeft="48dp"
         android:layout_marginTop="12dp"
         android:ems="10"
+        android:hint="@string/paginawebp"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/et_correo"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/et_correo" />
 
     <EditText
         android:id="@+id/et_facebook"
@@ -189,10 +193,11 @@
         android:layout_marginLeft="60dp"
         android:layout_marginTop="24dp"
         android:ems="10"
+        android:hint="@string/facebookp"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/et_pagina"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/et_pagina" />
 
     <EditText
         android:id="@+id/et_instagram"
@@ -202,10 +207,11 @@
         android:layout_marginLeft="56dp"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="@string/instagramp"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/et_facebook"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/et_facebook" />
 
     <EditText
         android:id="@+id/et_whatsapp"
@@ -215,18 +221,20 @@
         android:layout_marginLeft="56dp"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="@string/whatsapp"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/et_instagram"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/et_instagram" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="12dp"
+        android:onClick="cargarImagen"
         android:text="@string/cargarImagen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_whatsapp" />
@@ -235,9 +243,10 @@
         android:id="@+id/btnPublicar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginLeft="108dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginLeft="196dp"
+        android:layout_marginTop="4dp"
+        android:onClick="crearPublicacion"
         android:text="@string/crearPublicacion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button5" />

@@ -9,13 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ContactApp3">
-        <activity android:name=".publicar"></activity>
+        <activity android:name=".mostrar_publicaciones_user"></activity>
+        <activity android:name=".borrar" />
+        <activity android:name=".actualizar" />
+        <activity android:name=".publicar" />
         <activity android:name=".crear_anuncio" />
         <activity android:name=".categorias_emp" />
         <activity android:name=".recuperar" />
         <activity android:name=".crear_cuenta" />
         <activity android:name=".detalle" />
-        <activity android:name=".alimentos" />
+        <activity android:name=".mostrar_publicaciones" />
         <activity android:name=".categorias" />
         <activity android:name=".MainActivity">
             <intent-filter>

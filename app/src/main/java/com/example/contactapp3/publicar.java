@@ -2,6 +2,7 @@ package com.example.contactapp3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,56 +22,16 @@ public class publicar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicar);
 
-        et_nombre=(EditText)findViewById(R.id.et_nombre);
-        et_descripcion=(EditText)findViewById(R.id.et_descripcion);
-        et_correo=(EditText)findViewById(R.id.et_correo);
-        et_pagina=(EditText)findViewById(R.id.et_pagina);
-        et_facebook=(EditText)findViewById(R.id.et_facebook);
-        et_instagram=(EditText)findViewById(R.id.et_instagram);
-        et_whatsapp=(EditText)findViewById(R.id.et_whatsapp);
-
-        btnPublicar=(Button)findViewById(R.id.btnPublicar);
-
-        final AdminSQLiteOpenHelper bd_publicaciones = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
-
-        btnPublicar.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-                bd_publicaciones.ingresarPublicacion(
-                    et_nombre.getText().toString(),
-                    et_descripcion.getText().toString(),
-                    et_correo.getText().toString(),
-                    et_pagina.getText().toString(),
-                    et_facebook.getText().toString(),
-                    et_instagram.getText().toString(),
-                    et_whatsapp.getText().toString()
-                );
-
-                Toast.makeText(getApplicationContext(), "Publicación creada", Toast.LENGTH_LONG).show();
-
-                et_nombre.setText("");
-                et_descripcion.setText("");
-                et_correo.setText("");
-                et_pagina.setText("");
-                et_facebook.setText("");
-                et_instagram.setText("");
-                et_whatsapp.setText("");
-            }
-        }
-        );
-
     }
 
-    public void consultaPublicaciones(View v){
+    public void consultaPublicaciones(View v) {
         final AdminSQLiteOpenHelper bd_publicaciones = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
         SQLiteDatabase bd1 = bd_publicaciones.getWritableDatabase();
 
 
         Cursor fila = bd1.rawQuery("select * from publicaciones ", null);
 
-        if (fila.moveToFirst()){
+        if (fila.moveToFirst()) {
             et_nombre.setText(fila.getString(0));
             et_descripcion.setText(fila.getString(1));
             et_correo.setText(fila.getString(2));
@@ -84,17 +45,72 @@ public class publicar extends AppCompatActivity {
         bd_publicaciones.close();
     }
 
-    public void irAPublicarCategorias(View view){
+    public void irAPublicarCategorias(View view) {
 
         Intent i = new Intent(this, categorias_emp.class);
 
         startActivity(i);
     }
 
-    public void cerrarSesion(View view){
+    public void cerrarSesion(View view) {
 
         Intent i = new Intent(this, MainActivity.class);
 
         startActivity(i);
+    }
+
+    public void cargarImagen(View view) {
+
+        Toast.makeText(this, "Aqui se cargará esa imagen.", Toast.LENGTH_LONG).show();
+    }
+
+    public void crearPublicacion(View view) {
+        AdminSQLiteOpenHelper bd_user = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
+        SQLiteDatabase BaseDeDatos = bd_user.getWritableDatabase();
+
+        et_nombre = (EditText) findViewById(R.id.et_nombre);
+        et_descripcion = (EditText) findViewById(R.id.et_descripcion);
+        et_correo = (EditText) findViewById(R.id.et_correo);
+        et_pagina = (EditText) findViewById(R.id.et_pagina);
+        et_facebook = (EditText) findViewById(R.id.et_facebook);
+        et_instagram = (EditText) findViewById(R.id.et_instagram);
+        et_whatsapp = (EditText) findViewById(R.id.et_whatsapp);
+
+        btnPublicar = (Button) findViewById(R.id.btnPublicar);
+        String dato = getIntent().getStringExtra("dato");
+
+        String nombre = et_nombre.getText().toString();
+        String descripcion = et_descripcion.getText().toString();
+        String correo = et_correo.getText().toString();
+        String pagina = et_pagina.getText().toString();
+        String facebook = et_facebook.getText().toString();
+        String instagram = et_instagram.getText().toString();
+        String whatsapp = et_whatsapp.getText().toString();
+
+        ContentValues registro = new ContentValues();
+
+        //registro.put("id", 0);
+        registro.put("categoria", dato);
+        registro.put("nombre", nombre);
+        registro.put("descripcion", descripcion);
+        registro.put("correo", correo);
+        registro.put("pagina", pagina);
+        registro.put("facebook", facebook);
+        registro.put("instagram", instagram);
+        registro.put("whatsapp", whatsapp);
+
+        BaseDeDatos.insert("publicaciones", null, registro);
+
+        BaseDeDatos.close();
+
+        et_nombre.setText("");
+        et_descripcion.setText("");
+        et_correo.setText("");
+        et_pagina.setText("");
+        et_facebook.setText("");
+        et_instagram.setText("");
+        et_whatsapp.setText("");
+
+        Toast.makeText(this, "Publicación creada correctamente.", Toast.LENGTH_LONG).show();
     }
 }

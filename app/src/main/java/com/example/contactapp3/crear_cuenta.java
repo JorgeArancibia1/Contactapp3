@@ -31,34 +31,6 @@ public class crear_cuenta extends AppCompatActivity {
         rb_empresa=(RadioButton)findViewById(R.id.rb_empresa);
         btn_crear_cuenta = (Button)findViewById(R.id.btn_crear_cuenta);
 
-
-
-        /*
-        final AdminSQLiteOpenHelper bd_user = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-
-        String finalNivel = nivel;
-        btn_crear_cuenta.setOnClickListener(new View.OnClickListener() {
-
-
-           @Override
-           public void onClick(View view) {
-               bd_user.crearUsuario(
-                 0,
-                 et_nombrecc.getText().toString(),
-                 et_contrasenacc.getText().toString(),
-                 et_correocc.getText().toString(),
-                 finalNivel
-              );
-
-              Toast.makeText(getApplicationContext(), "Usuario creado", Toast.LENGTH_LONG).show();
-
-              et_nombrecc.setText("");
-              et_contrasenacc.setText("");
-              et_correocc.setText("");
-           }
-        }
-        );
-        */
     }
 
     public void volverAlInicio(View view){
@@ -114,8 +86,6 @@ public class crear_cuenta extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Error al crear usuario.", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
 

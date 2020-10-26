@@ -11,7 +11,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String NOMBRE_BD="bd";
     private static final int VERSION=1;
 
-    private static final String TABLA_PUBLICACIONES="create table publicaciones(id integer primary key, nombre text, descripcion text, correo text, pagina text, facebook text, instagram text, whatsapp text)";
+    private static final String TABLA_PUBLICACIONES="create table publicaciones(id integer primary key autoincrement, categoria text, nombre text, descripcion text, correo text, pagina text, facebook text, instagram text, whatsapp text)";
     private static final String TABLA_USUARIOS="create table usuarios(id integer primary key autoincrement, nombre text, contrasena text, correo text, nivel text)";
 
     public AdminSQLiteOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -32,11 +32,11 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
 
-    public void ingresarPublicacion(String nombre, String descripcion, String correo, String pagina, String facebook, String instagram, String whatsapp){
+    public void ingresarPublicacion(int id, String categoria, String nombre, String descripcion, String correo, String pagina, String facebook, String instagram, String whatsapp){
         SQLiteDatabase bd = getWritableDatabase(); // Se otorga permiso de escritura a la base de datos.
         if (bd != null){
             //Inserción de datos
-            bd.execSQL("insert into publicaciones values('"+nombre+"','"+descripcion+"','"+correo+"','"+pagina+"','"+facebook+"','"+instagram+"','"+whatsapp+"')");
+            bd.execSQL("insert into publicaciones values(id +'"+categoria+"','"+nombre+"','"+descripcion+"','"+correo+"','"+pagina+"','"+facebook+"','"+instagram+"','"+whatsapp+"')");
             bd.close();
         }
     }

@@ -29,7 +29,7 @@
             android:contentDescription="@string/avatar"
             android:onClick="volverAlInicio"
             android:rotationY="180"
-            app:srcCompat="@mipmap/chevron" />
+            app:srcCompat="@drawable/chevron" />
 
     </FrameLayout>
 
