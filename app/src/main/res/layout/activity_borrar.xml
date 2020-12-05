@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="borrarPublicacion"
     tools:context=".borrar">
 
     <FrameLayout
@@ -72,11 +73,11 @@
         android:layout_marginTop="52dp"
         android:ems="10"
         android:hint="@string/nombre"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:onClick="borrarPublicacion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <Button
         android:id="@+id/button2"
@@ -85,6 +86,7 @@
         android:layout_marginStart="148dp"
         android:layout_marginLeft="148dp"
         android:layout_marginTop="48dp"
+        android:onClick="borrarPublicacion"
         android:text="@string/Borrar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_nombre_borrar" />

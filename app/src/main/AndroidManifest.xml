@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.contactapp3">
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -16,7 +19,9 @@
         <activity android:name=".crear_anuncio" />
         <activity android:name=".categorias_emp" />
         <activity android:name=".recuperar" />
-        <activity android:name=".crear_cuenta" />
+        <activity android:name=".crear_cuenta"
+            android:parentActivityName=".MainActivity"
+            />
         <activity android:name=".detalle" />
         <activity android:name=".mostrar_publicaciones" />
         <activity android:name=".categorias" />

@@ -24,6 +24,7 @@ public class publicar extends AppCompatActivity {
 
     }
 
+    /*
     public void consultaPublicaciones(View v) {
         final AdminSQLiteOpenHelper bd_publicaciones = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
         SQLiteDatabase bd1 = bd_publicaciones.getWritableDatabase();
@@ -44,6 +45,7 @@ public class publicar extends AppCompatActivity {
         }
         bd_publicaciones.close();
     }
+    */
 
     public void irAPublicarCategorias(View view) {
 
@@ -87,30 +89,38 @@ public class publicar extends AppCompatActivity {
         String instagram = et_instagram.getText().toString();
         String whatsapp = et_whatsapp.getText().toString();
 
-        ContentValues registro = new ContentValues();
+        if (!nombre.isEmpty()){
+            ContentValues registro = new ContentValues();
 
-        //registro.put("id", 0);
-        registro.put("categoria", dato);
-        registro.put("nombre", nombre);
-        registro.put("descripcion", descripcion);
-        registro.put("correo", correo);
-        registro.put("pagina", pagina);
-        registro.put("facebook", facebook);
-        registro.put("instagram", instagram);
-        registro.put("whatsapp", whatsapp);
+            //registro.put("id", 0);
+            registro.put("categoria", dato);
+            registro.put("nombre", nombre);
+            registro.put("descripcion", descripcion);
+            registro.put("correo", correo);
+            registro.put("pagina", pagina);
+            registro.put("facebook", facebook);
+            registro.put("instagram", instagram);
+            registro.put("whatsapp", whatsapp);
 
-        BaseDeDatos.insert("publicaciones", null, registro);
+            BaseDeDatos.insert("publicaciones", null, registro);
 
-        BaseDeDatos.close();
+            BaseDeDatos.close();
 
-        et_nombre.setText("");
-        et_descripcion.setText("");
-        et_correo.setText("");
-        et_pagina.setText("");
-        et_facebook.setText("");
-        et_instagram.setText("");
-        et_whatsapp.setText("");
+            et_nombre.setText("");
+            et_descripcion.setText("");
+            et_correo.setText("");
+            et_pagina.setText("");
+            et_facebook.setText("");
+            et_instagram.setText("");
+            et_whatsapp.setText("");
 
-        Toast.makeText(this, "Publicación creada correctamente.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Publicación creada correctamente.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Ha ocurrido un error.", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
     }
 }

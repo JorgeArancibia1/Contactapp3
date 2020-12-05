@@ -1,6 +1,7 @@
 package com.example.contactapp3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -12,16 +13,36 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class crear_cuenta extends AppCompatActivity {
 
     EditText et_nombrecc, et_contrasenacc, et_confContrasenacc, et_correocc;
     Button btn_crear_cuenta;
     RadioButton rb_persona, rb_empresa;
+    private JsonObjectRequest mJsonObjectRequest;
+    private RequestQueue mRequestQueue;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_cuenta);
+        mToolbar = findViewById(R.id.id_toobar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         et_nombrecc=(EditText)findViewById(R.id.txt_nombrecc);
         et_contrasenacc=(EditText)findViewById(R.id.txt_contrasenacc);
@@ -31,6 +52,12 @@ public class crear_cuenta extends AppCompatActivity {
         rb_empresa=(RadioButton)findViewById(R.id.rb_empresa);
         btn_crear_cuenta = (Button)findViewById(R.id.btn_crear_cuenta);
 
+        btn_crear_cuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crearCuenta("http://10.0.2.2/android/ingresar.php");
+            }
+        });
     }
 
     public void volverAlInicio(View view){
@@ -40,13 +67,11 @@ public class crear_cuenta extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void crearUsuario(View view){
-        AdminSQLiteOpenHelper bd_user = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-        SQLiteDatabase BaseDeDatos = bd_user.getWritableDatabase();
+    private void crearCuenta(String URL) {
 
-        String nombre = et_nombrecc.getText().toString();
-        String contrasena = et_contrasenacc.getText().toString();
-        String correo = et_correocc.getText().toString();
+        String nombre_ = et_nombrecc.getText().toString();
+        String contrasena_ = et_contrasenacc.getText().toString();
+        String correo_ = et_correocc.getText().toString();
         String contrasenaRep = et_confContrasenacc.getText().toString();
 
         String nivel = "";
@@ -56,21 +81,35 @@ public class crear_cuenta extends AppCompatActivity {
         } else if (rb_empresa.isChecked() == true) {
             nivel = "2";
         }
+        String finalNivel = nivel;
 
-        if (!nombre.isEmpty() && !contrasena.isEmpty() && !correo.isEmpty()){
+        if (!nombre_.isEmpty() && !contrasena_.isEmpty() && !correo_.isEmpty()){
+            if (contrasena_.equals(contrasenaRep)){
 
-            if (contrasena.equals(contrasenaRep)){
-                ContentValues registro = new ContentValues();
+                StringRequest stringRequest=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }){
+                    @Override
+                    protected Map<String,String> getParams() throws AuthFailureError {
+                        Map<String,String> parametros=new HashMap<String, String>();
+                        parametros.put("nombre", nombre_);
+                        parametros.put("contrasena", contrasena_);
+                        parametros.put("correo", correo_);
+                        parametros.put("nivel", finalNivel);
 
-                //registro.put("id", 0);
-                registro.put("nombre", nombre);
-                registro.put("contrasena", contrasena);
-                registro.put("correo", correo);
-                registro.put("nivel", nivel);
-
-                BaseDeDatos.insert("usuarios", null, registro);
-
-                BaseDeDatos.close();
+                        return parametros;
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                requestQueue.add(stringRequest);
 
                 et_nombrecc.setText("");
                 et_contrasenacc.setText("");
@@ -82,11 +121,8 @@ public class crear_cuenta extends AppCompatActivity {
                 Toast.makeText(this, "Las contraseñas deben coincidir.", Toast.LENGTH_LONG).show();
 
             }
-
         } else {
             Toast.makeText(this, "Error al crear usuario.", Toast.LENGTH_LONG).show();
         }
     }
-
-
 }

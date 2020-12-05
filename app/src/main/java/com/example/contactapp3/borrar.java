@@ -26,7 +26,6 @@ public class borrar extends AppCompatActivity {
 
         Intent i = new Intent(this, MainActivity.class);
 
-        //i.putExtra("dato", editTextName.getText().toString());
         startActivity(i);
     }
 
@@ -47,7 +46,7 @@ public class borrar extends AppCompatActivity {
                 Toast.makeText(this, "El nombre de la publicacion ingresada no existe.", Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(this, "Debes introducir el nombre de la publicación.", Toast.LENGTH_LONG).show();
+          //  Toast.makeText(this, "Debes introducir el nombre de la publicación.", Toast.LENGTH_LONG).show();
         }
     }
 

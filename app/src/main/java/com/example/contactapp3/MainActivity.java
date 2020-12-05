@@ -8,12 +8,27 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextName,editTextPassword;
+    Button btn_login;
+
+    RequestQueue requestQueue;
+    String n = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,21 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
         editTextName = (EditText) findViewById(R.id.txt_user);
         editTextPassword = (EditText) findViewById(R.id.txt_pass);
+        btn_login = (Button)findViewById(R.id.button_login);
+        btn_login.setOnClickListener(this);
+
     }
-
-    /*
-    public void Ingresar(View view){
-        String nombre = editTextName.getText().toString();
-        String contrasena = editTextPassword.getText().toString();
-
-
-
-        if (nombre.length()!=0 && contrasena.length()!=0){
-            i.putExtra("dato", editTextName.getText().toString());
-            startActivity(i);
-        }
-    }
-    */
 
     public void irACrearCuenta(View view){
 
@@ -52,69 +56,57 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void validarUsuario(View view){
+    public void validarUsuario(){
 
-
-        AdminSQLiteOpenHelper bd_user = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-        SQLiteDatabase DatosDeUsuario = bd_user.getWritableDatabase();
-
-        String nombre = editTextName.getText().toString();
-        String contrasena = editTextPassword.getText().toString();
+        String nombre__ = editTextName.getText().toString();
+        String contrasena__ = editTextPassword.getText().toString();
         Intent i = new Intent(this, categorias.class);
         Intent i_emp = new Intent(this, categorias_emp.class);
-
-        if (nombre.length()==0){
-            Toast.makeText(this,"Debe ingresar el nombre", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Soy una prueba", Toast.LENGTH_SHORT).show();
+        if (nombre__.length()==0){
+            Toast.makeText(getApplicationContext(),"Debe ingresar el nombre", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (contrasena.length()==0){
-            Toast.makeText(this, "Debe ingresar una contraseña", Toast.LENGTH_LONG).show();
+        if (contrasena__.length()==0){
+            Toast.makeText(getApplicationContext(), "Debe ingresar una contraseña", Toast.LENGTH_LONG).show();
             return;
         }
 
+        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest("http://10.0.2.2/android/buscar_usuario.php?nombre=" + nombre__, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        n = jsonObject.getString("nivel");
 
-            Cursor fila = DatosDeUsuario.rawQuery("select * from usuarios where nombre=?", new String[]{nombre});
-
-            if (fila.moveToFirst()) {
-
-                int id = fila.getInt(0);
-                String bd_nombre = fila.getString(1);
-                boolean b = contrasena.equals(fila.getString(2));
-                String bd_correo = fila.getString(3);
-                String bd_nivel = fila.getString(4);
-
-
-                if (b == true && bd_nivel.equals("1")){
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                if (n.equals("1")){
                     startActivity(i);
-                } else if ( b == true && bd_nivel.equals("2")){
+                } else if (n.equals("2")) {
                     startActivity(i_emp);
                 }
-                DatosDeUsuario.close();
-            } else {
-                Toast.makeText(this, "No se encontró ningún usuario registrado con ese nombre.",Toast.LENGTH_LONG).show();
             }
-    }
-
-    /*
-    public void consultarNivel(View v){
-        final AdminSQLiteOpenHelper bd=new AdminSQLiteOpenHelper((getApplicationContext()));
-        SQLiteDatabase bd1=bd.getWritableDatabase();
-
-
-        Cursor fila = bd1.rawQuery("select * from publicaciones ", null);
-
-        if (fila.moveToFirst()){
-            et_nombre.setText(fila.getString(0));
-            et_descripcion.setText(fila.getString(1));
-            et_correo.setText(fila.getString(2));
-            et_pagina.setText(fila.getString(3));
-            et_facebook.setText(fila.getString(4));
-            et_instagram.setText(fila.getString(5));
-            et_whatsapp.setText(fila.getString(6));
-        } else {
-            Toast.makeText(this, "No existen publicaciones.", Toast.LENGTH_SHORT).show();
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR DE CONEXIÓN",Toast.LENGTH_SHORT).show();
+            }
         }
-        bd.close();
+        );
+        requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(jsonArrayRequest);
+
     }
-    */
+
+    @Override
+    public void onClick(View v) {
+        if(v == btn_login){
+            validarUsuario();
+        }
+    }
 }
