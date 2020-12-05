@@ -11,9 +11,31 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.RequestQueue;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class mostrar_publicaciones extends AppCompatActivity {
 
     private TextView tv_titulo, tv_descripcion;
+
+    private RequestQueue mRequestQueue;
+
+    String nombre_empresa = "";
+    String descripcion = "";
+    String correo = "";
+    String pagina = "";
+    String facebook = "";
+    String instagram = "";
+    String whatsapp = "";
+    String titulo_ = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,34 +45,43 @@ public class mostrar_publicaciones extends AppCompatActivity {
         tv_titulo = (TextView) findViewById(R.id.txt_alimentos1);
         tv_descripcion = (TextView) findViewById(R.id.txt_descripcionU);
 
-        AdminSQLiteOpenHelper bd_publicaciones = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
-        SQLiteDatabase BaseDeDatos = bd_publicaciones.getWritableDatabase();
-
-        String titulo = tv_titulo.getText().toString();
-        String nombre_empresa = "";
-        String descripcion = "";
-        String correo = "";
-        String pagina = "";
-        String facebook = "";
-        String instagram = "";
-        String whatsapp = "";
+        titulo_ = tv_titulo.getText().toString();
 
 
-        Cursor fila = BaseDeDatos.rawQuery("select * from publicaciones where categoria=?", new String[]{titulo});
+        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest("http://10.0.2.2/android/buscar_por_categoria.php?titulo=" + titulo_, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                JSONObject jsonObject = null;
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        nombre_empresa = jsonObject.getString("nombre");
+                        descripcion = jsonObject.getString("descripcion");
+                        correo = jsonObject.getString("correo");
+                        pagina = jsonObject.getString("pagina");
+                        facebook = jsonObject.getString("facebook");
+                        instagram = jsonObject.getString("instagram");
+                        whatsapp = jsonObject.getString("whatsapp");
 
-        if (fila.moveToFirst()){
-            nombre_empresa = fila.getString(2);
-            descripcion = fila.getString(3);
-            correo = fila.getString(4);
-            pagina = fila.getString(5);
-            facebook = fila.getString(6);
-            instagram = fila.getString(7);
-            whatsapp = fila.getString(8);
+                        String todo = nombre_empresa + "\n" + descripcion + "\n" + correo + "\n" + pagina + "\n" + facebook + "\n" + instagram + "\n" + whatsapp;
+                        tv_descripcion.setText(todo);
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "ERROR DE CONEXIÓN",Toast.LENGTH_SHORT).show();
+            }
         }
+        );
+        mRequestQueue = Volley.newRequestQueue(this);
+        mRequestQueue.add(jsonArrayRequest);
 
-        String todo = nombre_empresa + "\n" + descripcion + "\n" + correo + "\n" + pagina + "\n" + facebook + "\n" + instagram + "\n" + whatsapp;
 
-        tv_descripcion.setText(todo);
     }
 
     public void cerrarSesion(View view){

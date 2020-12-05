@@ -12,6 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class publicar extends AppCompatActivity {
 
     EditText et_nombre, et_descripcion, et_correo, et_pagina, et_facebook, et_instagram, et_whatsapp;
@@ -21,31 +32,7 @@ public class publicar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicar);
-
     }
-
-    /*
-    public void consultaPublicaciones(View v) {
-        final AdminSQLiteOpenHelper bd_publicaciones = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
-        SQLiteDatabase bd1 = bd_publicaciones.getWritableDatabase();
-
-
-        Cursor fila = bd1.rawQuery("select * from publicaciones ", null);
-
-        if (fila.moveToFirst()) {
-            et_nombre.setText(fila.getString(0));
-            et_descripcion.setText(fila.getString(1));
-            et_correo.setText(fila.getString(2));
-            et_pagina.setText(fila.getString(3));
-            et_facebook.setText(fila.getString(4));
-            et_instagram.setText(fila.getString(5));
-            et_whatsapp.setText(fila.getString(6));
-        } else {
-            Toast.makeText(this, "No existen publicaciones.", Toast.LENGTH_SHORT).show();
-        }
-        bd_publicaciones.close();
-    }
-    */
 
     public void irAPublicarCategorias(View view) {
 
@@ -62,13 +49,10 @@ public class publicar extends AppCompatActivity {
     }
 
     public void cargarImagen(View view) {
-
         Toast.makeText(this, "Aqui se cargará esa imagen.", Toast.LENGTH_LONG).show();
     }
 
     public void crearPublicacion(View view) {
-        AdminSQLiteOpenHelper bd_user = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
-        SQLiteDatabase BaseDeDatos = bd_user.getWritableDatabase();
 
         et_nombre = (EditText) findViewById(R.id.et_nombre);
         et_descripcion = (EditText) findViewById(R.id.et_descripcion);
@@ -79,33 +63,49 @@ public class publicar extends AppCompatActivity {
         et_whatsapp = (EditText) findViewById(R.id.et_whatsapp);
 
         btnPublicar = (Button) findViewById(R.id.btnPublicar);
+
         String dato = getIntent().getStringExtra("dato");
 
-        String nombre = et_nombre.getText().toString();
-        String descripcion = et_descripcion.getText().toString();
-        String correo = et_correo.getText().toString();
-        String pagina = et_pagina.getText().toString();
-        String facebook = et_facebook.getText().toString();
-        String instagram = et_instagram.getText().toString();
-        String whatsapp = et_whatsapp.getText().toString();
+        String nombre___ = et_nombre.getText().toString();
+        String descripcion___ = et_descripcion.getText().toString();
+        String correo___ = et_correo.getText().toString();
+        String pagina___ = et_pagina.getText().toString();
+        String facebook___ = et_facebook.getText().toString();
+        String instagram___ = et_instagram.getText().toString();
+        String whatsapp___ = et_whatsapp.getText().toString();
 
-        if (!nombre.isEmpty()){
-            ContentValues registro = new ContentValues();
+        if (!nombre___.isEmpty()){
+            //
+            StringRequest stringRequest=new StringRequest(Request.Method.POST, "http://10.0.2.2/android/ingresar_publicacion.php", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }){
+                @Override
+                protected Map<String,String> getParams() throws AuthFailureError {
+                    Map<String,String> parametros=new HashMap<String, String>();
+                    parametros.put("categoria", dato);
+                    parametros.put("nombre", nombre___);
+                    parametros.put("descripcion", descripcion___);
+                    parametros.put("correo", correo___);
+                    parametros.put("pagina", pagina___);
+                    parametros.put("facebook", facebook___);
+                    parametros.put("instagram", instagram___);
+                    parametros.put("whatsapp", whatsapp___);
 
-            //registro.put("id", 0);
-            registro.put("categoria", dato);
-            registro.put("nombre", nombre);
-            registro.put("descripcion", descripcion);
-            registro.put("correo", correo);
-            registro.put("pagina", pagina);
-            registro.put("facebook", facebook);
-            registro.put("instagram", instagram);
-            registro.put("whatsapp", whatsapp);
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
 
-            BaseDeDatos.insert("publicaciones", null, registro);
-
-            BaseDeDatos.close();
-
+            //
             et_nombre.setText("");
             et_descripcion.setText("");
             et_correo.setText("");
@@ -118,9 +118,5 @@ public class publicar extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Ha ocurrido un error.", Toast.LENGTH_SHORT).show();
         }
-
-
-
-
     }
 }

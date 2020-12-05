@@ -11,6 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class actualizar extends AppCompatActivity {
 
     private EditText et_nombre, et_descripcion, et_correo, et_pagina, et_facebook, et_instagram, et_whatsapp;
@@ -45,36 +56,44 @@ public class actualizar extends AppCompatActivity {
     }
 
     public void actualizarPublicacion(View view) {
-        AdminSQLiteOpenHelper bd_publicaciones = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
-        SQLiteDatabase BaseDeDatos = bd_publicaciones.getWritableDatabase();
 
-        String nombre = et_nombre.getText().toString();
-        String descripcion = et_descripcion.getText().toString();
-        String correo = et_correo.getText().toString();
-        String pagina = et_pagina.getText().toString();
-        String facebook = et_facebook.getText().toString();
-        String instagram = et_instagram.getText().toString();
-        String whatsapp = et_whatsapp.getText().toString();
+        String _nombre = et_nombre.getText().toString();
+        String _descripcion = et_descripcion.getText().toString();
+        String _correo = et_correo.getText().toString();
+        String _pagina = et_pagina.getText().toString();
+        String _facebook = et_facebook.getText().toString();
+        String _instagram = et_instagram.getText().toString();
+        String _whatsapp = et_whatsapp.getText().toString();
 
-        ContentValues registro = new ContentValues();
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, "http://10.0.2.2/android/actualizar.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String, String>();
 
-        registro.put("nombre", nombre);
-        registro.put("descripcion", descripcion);
-        registro.put("correo", correo);
-        registro.put("pagina", pagina);
-        registro.put("facebook", facebook);
-        registro.put("instagram", instagram);
-        registro.put("whatsapp", whatsapp);
+                parametros.put("descripcion", _descripcion);
+                parametros.put("correo", _correo);
+                parametros.put("pagina", _pagina);
+                parametros.put("facebook", _facebook);
+                parametros.put("instagram", _instagram);
+                parametros.put("whatsapp", _whatsapp);
+                parametros.put("nombre", _nombre);
+                System.out.println(parametros);
 
-        int cantidad = BaseDeDatos.update("publicaciones", registro, "nombre='" + nombre + "'", null);
-        BaseDeDatos.close();
-
-        if (cantidad <= 1){
-            Toast.makeText(this, "Publicación actualizada correctamente.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Ha ocurrido un error al actualizar.", Toast.LENGTH_LONG).show();
-        }
-
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
 
         et_nombre.setText("");
         et_descripcion.setText("");
@@ -84,6 +103,5 @@ public class actualizar extends AppCompatActivity {
         et_instagram.setText("");
         et_whatsapp.setText("");
 
-        //Toast.makeText(this, "Publicación actualizada correctamente.", Toast.LENGTH_LONG).show();
     }
 }
