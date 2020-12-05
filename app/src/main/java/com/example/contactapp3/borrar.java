@@ -10,6 +10,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class borrar extends AppCompatActivity {
 
     EditText et_nombre;
@@ -31,22 +42,36 @@ public class borrar extends AppCompatActivity {
 
     public void borrarPublicacion(View view){
 
-        AdminSQLiteOpenHelper bd_publicaciones = new AdminSQLiteOpenHelper(this, "publicaciones", null, 1);
-        SQLiteDatabase BaseDeDatos = bd_publicaciones.getWritableDatabase();
-
         String nombre = et_nombre.getText().toString();
 
         if (!nombre.isEmpty()){
-            int cantidad = BaseDeDatos.delete("publicaciones", "nombre='" + nombre + "'", null);
-            BaseDeDatos.close();
+            StringRequest stringRequest=new StringRequest(Request.Method.POST, "http://10.0.2.2/android/borrar.php", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(getApplicationContext(), "Operación Exitosa", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }){
+                @Override
+                protected Map<String,String> getParams() throws AuthFailureError {
+                    Map<String,String> parametros=new HashMap<String, String>();
 
-            if (cantidad <= 1){
-                Toast.makeText(this, "Publicación eliminada correctamente.", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "El nombre de la publicacion ingresada no existe.", Toast.LENGTH_LONG).show();
-            }
+                    parametros.put("nombre", nombre);
+
+                    return parametros;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+
+            et_nombre.setText("");
+
         } else {
-          //  Toast.makeText(this, "Debes introducir el nombre de la publicación.", Toast.LENGTH_LONG).show();
+          Toast.makeText(this, "Debes introducir el nombre de la publicación.", Toast.LENGTH_LONG).show();
         }
     }
 

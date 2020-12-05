@@ -87,7 +87,6 @@ public class actualizar extends AppCompatActivity {
                 parametros.put("instagram", _instagram);
                 parametros.put("whatsapp", _whatsapp);
                 parametros.put("nombre", _nombre);
-                System.out.println(parametros);
 
                 return parametros;
             }
